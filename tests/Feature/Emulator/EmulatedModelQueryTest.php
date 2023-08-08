@@ -598,6 +598,11 @@ class EmulatedModelQueryTest extends TestCase
 
         $this->assertTrue($user->groups()->exists($group));
         $this->assertTrue($group->members()->exists($user));
+
+        $user->groups()->detach($group);
+
+        $this->assertFalse($user->groups()->exists($group));
+        $this->assertFalse($group->members()->exists($user));
     }
 
     public function test_has_one_relationship()
